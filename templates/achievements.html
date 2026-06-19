@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Achievements 🏆</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🏆 Achievement Center</h1>
+
+        <a href="/">
+            <button class="add-btn">
+                ← Dashboard
+            </button>
+        </a>
+
+        <br><br>
+
+        <div class="stat-card">
+
+            <h2>
+                {{ unlocked }} / {{ total_achievements }}
+            </h2>
+
+            <p>
+                Achievements Unlocked
+            </p>
+
+        </div>
+
+        <br>
+
+        <p>
+            Progress: {{ achievement_percentage }}%
+        </p>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"style="width: {{ achievement_percentage }}%;">
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <h2>🎉 Unlocked Achievements</h2>
+
+        <div class="achievement-section">
+
+            {% if achievements %}
+
+                {% for achievement in achievements %}
+
+                    <div class="badge">
+
+                        {{ achievement }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>
+                    No achievements unlocked yet 😢
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        <br><br>
+
+        <h2>🔒 Future Achievements</h2>
+
+        <div class="achievement-section">
+
+            <div class="badge locked">
+                👑 Task Master (50 Tasks)
+            </div>
+
+            <div class="badge locked">
+                🏅 30 Day Legend
+            </div>
+
+            <div class="badge locked">
+                👑 Productivity King
+            </div>
+
+            <div class="badge locked">
+                👑 Ultimate Legend
+            </div>
+
+            <div class="badge locked">
+                🚀 Reach Level 5
+            </div>
+
+        </div>
+
+        <p class="footer">
+        hecho con amor by Charulathaa
+        </p>
+
+    </div>
+
+</body>
+
+</html>
