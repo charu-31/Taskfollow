@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow 🚀</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>TaskFlow 🚀</h1>
+
+        <div class="user-bar">
+
+            <h3>
+                Welcome, {{ session['username'] }} 👋
+            </h3>
+
+            <a href="/logout">
+                <button class="logout-btn" type="button">
+                    Logout
+                </button>
+            </a>
+            <a href="/achievements">
+                <button class="edit-btn">
+                    Achievements 🏆
+                </button>
+            </a>
+            <a href="/profile">
+                <button class="edit-btn">
+                    Profile 👤
+                </button>
+            </a>
+
+        </div>
+    <div class="stats-container">
+
+        <div class="stat-card">
+            <h3>{{ total_tasks }}</h3>
+            <p>Total Tasks</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>{{ completed_tasks }}</h3>
+            <p>Completed</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>{{ pending_tasks }}</h3>
+            <p>Pending</p>
+        </div>
+        <div class="stat-card">
+        <h3>{{ score }}</h3>
+            <p>Productivity Score ⚡</p>
+        </div>
+        <div class="stat-card">
+        <h3>{{ current_streak }}</h3>
+        <p>🔥 Streak</p>
+        </div>
+
+    </div>
+    
+
+    <div class="progress-section">
+        
+        <p>Progress: {{ progress }}%</p>
+
+        <div class="progress-bar">
+
+        <div class="progress-fill"style="width: {{ progress }}%"></div>
+
+        </div>
+
+    </div>
+    <div class="achievement-section">
+
+        <h2>🏆 Achievements</h2>
+
+        {% if completed_tasks >= 1 %}
+            <div class="badge">
+                🏆 First Task Completed
+            </div>
+        {% endif %}
+
+        {% if completed_tasks >= 5 %}
+            <div class="badge">
+                ⭐ Task Starter
+            </div>
+        {% endif %}
+
+        {% if completed_tasks >= 10 %}
+            <div class="badge">
+                ⚡ 10 Tasks Completed
+            </div>
+        {% endif %}
+
+        {% if current_streak >= 3 %}
+            <div class="badge">
+             🔥 3-Day Streak
+            </div>
+        {% endif %}
+
+        {% if current_streak >= 7 %}
+            <div class="badge">
+                🚀 7-Day Streak
+            </div>
+        {% endif %}
+
+        {% if productivity_score >= 50 %}
+            <div class="badge">
+                👑 Productivity Master
+            </div>
+        {% endif %}
+
+    </div>
+
+        <form method="POST" action="/add">
+
+            <input
+                type="text"
+                name="task"
+                placeholder="What needs to be done?"
+                required
+            >
+
+            <input
+                type="date"
+                name="due_date"
+            >
+
+            <button class="add-btn" type="submit">
+                Add Task
+            </button>
+
+        </form>
+
+        <ul>
+
+            {% for task in tasks %}
+
+            <li>
+
+                <div class="task-info">
+
+                    {% if task[2] == 1 %}
+
+                        <span class="task-title completed">
+                            ✅ <s>{{ task[1] }}</s>
+                        </span>
+
+                    {% else %}
+
+                        {% if task[3] and task[3] < today %}
+
+                        <span class="task-title" style="color:red;font-weight:bold;">
+                        ⚠️ {{ task[1] }}
+                        </span>
+
+                        {% else %}
+
+                        <span class="task-title">
+                        {{ task[1] }}
+                        </span>
+
+                     {% endif %}
+
+                    {% endif %}
+
+                    {% if task[3] %}
+
+                    <span class="task-date">
+                    📅 Due: {{ task[3] }}
+                    </span>
+
+                    {% if task[3] < today and task[2] == 0 %}
+                    <span
+                    style="
+                        color:red;
+                        font-weight:bold;
+                        display:block;
+                        margin-top:5px;
+                        ">⚠️ OVERDUE
+                        </span>
+                    {% endif %}
+
+{% endif %}
+
+                </div>
+
+                <div class="actions">
+
+
+                    <a href="/toggle/{{ task[0] }}">
+                        <button class="complete-btn" type="button">
+
+                        {% if task[2] == 1 %}
+                            Undo
+                        {% else %}
+                            Complete
+                        {% endif %}
+
+                        </button>
+                    </a>
+
+
+                    <a href="/edit/{{ task[0] }}">
+                        <button
+                            class="edit-btn"
+                            type="button">
+                            Edit
+                        </button>
+                    </a>
+
+                    <a href="/delete/{{ task[0] }}">
+                        <button
+                            class="delete-btn"
+                            type="button">
+                            Delete
+                        </button>
+                    </a>
+
+                </div>
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <p class="footer">
+        Hecho con amor by Charulathaa
+        </p>
+
+    </div>
+    
+
+</body>
+
+</html>
