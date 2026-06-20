@@ -1,4 +1,4 @@
-# TaskFollow 🚀
+# TaskFlow 🚀
 
 A gamified task management web application built with Flask and SQLite.
 
