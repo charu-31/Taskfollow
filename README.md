@@ -1,4 +1,4 @@
-# TaskFlow 🚀
+# TaskFollow 🚀
 
 A gamified task management web application built with Flask and SQLite.
 
@@ -36,4 +36,4 @@ A gamified task management web application built with Flask and SQLite.
 1. Clone the repository
 
 ```bash
-git clone <your-repository-link>
+git clone https://taskfollow-b4a7.onrender.com
