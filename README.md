@@ -1,6 +1,7 @@
 # TaskFlow 🚀
 
 A gamified task management web application built with Flask and SQLite.
+Repository named as Taskfollow due to commit changes.
 
 ## Features
 
